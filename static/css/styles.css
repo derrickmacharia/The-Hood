@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+h1{
+  color: coral;
+  /* font-family: 'Staatliches', cursive; */
+  font-family: 'Fredoka One', cursive;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  /* position: fixed;
+  top: 0;
+  width: 100%; */
+}
+
+li {
+  float: left;
+}
+
+.active {
+  background-color: #04AA6D;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: #111;
+  text-decoration: none;
+  color: coral;
+}
