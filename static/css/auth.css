@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Luckiest+Guy&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h4{
+    color: coral;
+    font-family: 'Luckiest Guy', cursive;
+    margin-top: 2rem;
+}
+
+.register-body{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+.register-form{
+    border-radius: 20px;
+    padding: 40px;
+    font-family: 'Fredoka One', cursive;
+    width: 80%;
+
+}
+.register-form:hover{
+    box-shadow: 0 0 10px rgba(112, 108, 108, 0.3), 0 0 20px rgba(112, 108, 108, 0.1), 0 0 40px rgba(112, 108, 108, 0.1);
+}
+
+.login-body{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    
+}
+.login-form{
+    border-radius: 20px;
+    padding: 40px;
+    font-family: 'Fredoka One', cursive;
+    width: 80%;
+    /* box-shadow: 0 0 10px rgba(	255, 127, 80, 0.3), 0 0 20px rgba(	255, 127, 80, 0.1), 0 0 40px rgba(	255, 127, 80, 0.1); */
+
+}
+.login-form:hover{
+    box-shadow: 0 0 10px rgba(112, 108, 108, 0.3), 0 0 20px rgba(112, 108, 108, 0.1), 0 0 40px rgba(112, 108, 108, 0.1);
+}

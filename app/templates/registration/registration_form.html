@@ -1,0 +1,71 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+<!-- <div class="container-fluid register-page">
+    <div class="row">
+
+
+        <div class=" registration-section">
+            {% if form.errors %}
+            <p> Some Information Might be Incorrect </p>
+            {% endif %}
+            <div class="">
+
+                <div class="register-body">
+
+                        <div class="">
+                            <h4 class="text-center">Neighbor-Hood</h4>
+                        </div>
+                        <div class="register-form col-md-6">
+        
+                            <form action="/accounts/register/" method="post">
+                                <!-- {% csrf_token %}
+                                {% bootstrap_form form %}
+                                {% load crispy_forms_tags %}
+                                {{ form | crispy }}
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="SIGN UP">
+                                </div>
+        
+                                <input type="hidden" name="next" value="{{next}}">
+        
+                            </form>
+        
+                        </div>
+                        <div class="register-img col-md-6">
+                            <img src="/static/images/undraw_secure_login_pdn4.svg" alt="" class="responsive">
+                        </div>
+                </div>
+
+            </div>
+
+        </div>
+     
+    </div>
+   
+</div> -->
+
+<div class="container">
+    <div class="">
+        <h4 class="text-center">Neighbor-Hood</h4>
+    </div>
+    <div class="register-body ">
+        <div class="register-form ">
+            <form action="/accounts/register/" method="post">
+                <!-- {% csrf_token %}
+                {% bootstrap_form form %} -->
+                {% load crispy_forms_tags %}
+                {{ form | crispy }}
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-sm" value="SIGN UP">
+                </div>
+    
+                <input type="hidden" name="next" value="{{next}}">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

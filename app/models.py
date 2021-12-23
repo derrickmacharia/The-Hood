@@ -29,3 +29,26 @@ class Profile(models.Model):
     mobile_number = models.IntegerField(blank=True)
     email =  models.CharField(max_length=60) 
 
+    def update(self):
+        self.save()
+
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
+    def create_profile(self):
+        self.save()
+
+    def update_profile(self):
+        self.update()
+
+    @classmethod
+    def get_profile_by_user(cls, user):
+        profile = cls.objects.filter(user=user)
+        return profile
+
+    def __str__(self):
+        return self.user.username
+
