@@ -50,3 +50,16 @@ li a:hover {
   text-decoration: none;
   color: coral;
 }
+
+.prof-pic{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.profile-img{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}

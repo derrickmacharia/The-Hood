@@ -1,0 +1,21 @@
+{%extends "registration/base.html"%}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h1 class="heading">THANK YOU FOR VISITING</h1>
+           <a href="/accounts/login/"> <button class="login-btn">LOG BACK IN</button></a>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="logout-text">
+            <p>{{ user.first_name}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container quote text-center">
+    <p>'Welcome back soon'</p>
+</div>
+{% endblock %}

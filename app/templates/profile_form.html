@@ -1,0 +1,31 @@
+{%extends 'registration/base.html'%}
+{% load bootstrap4 %}
+{% load static%}
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="mt-5">
+            <h1 class="heading-profile">CREATE PROFILE FORM <br> TO ACCESS <br> THE PAGE...</h1>
+            <p class="profile-text">But first, let's update your profile</p>
+        </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="prof-body">
+                <form action="{% url 'create_profile'%}" method="post" enctype="multipart/form-data">
+
+                    {% load crispy_forms_tags %}
+                    {{ form | crispy }}
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <input type="submit" class="m-4 btn btn-primary login-btn" value="UPDATE PROFILE">
+                    </div>
+                    <input type="hidden" name="next" value="{{next}}">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}

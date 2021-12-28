@@ -20,14 +20,19 @@ class Location(models.Model):
     def _str_(self):
         return self.name
 
+
 class Profile(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE, null=True)    
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    username =  models.CharField(max_length=100)
     profile_pic = CloudinaryField('image')
-    description = models.CharField(max_length=250)
+    bio = models.CharField(max_length=250)
     mobile_number = models.IntegerField(blank=True)
     email =  models.CharField(max_length=60) 
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)    
+
 
     def update(self):
         self.save()
@@ -51,4 +56,5 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
 
