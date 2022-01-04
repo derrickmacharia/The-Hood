@@ -99,4 +99,9 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
-    user
+    user = models.ForeignKey(User,on_delete = models.CASCADE, null=True)  
+    title = models.CharField(max_length=100)
+    post_image = CloudinaryField('post_image', null=True)
+    post_description = models.TextField(max_length=1000)
+    hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
+    
