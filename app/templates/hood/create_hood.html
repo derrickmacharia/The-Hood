@@ -1,0 +1,25 @@
+{%extends 'registration/base.html'%}
+{% load bootstrap4 %}
+{% load static%}
+{% block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="prof-body">
+                <form action="{% url 'create_hood'%}" method="post" enctype="multipart/form-data">
+
+                    {% load crispy_forms_tags %}
+                    {{ hood_form | crispy }}
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <input type="submit" class="m-4 btn btn-primary login-btn" value="CREATE HOOD">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -11,15 +11,54 @@ from django.db.models.fields import related
 
 class Location(models.Model):
     name = models.CharField(max_length=30)
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+    # save location
     def save_location(self):
         self.save()
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
+
+class Neighborhood(models.Model):
+    hood_image =  CloudinaryField('hood_image', null=True)
+    name = models.CharField(max_length=100)
+    hood_description = models.TextField(max_length=1000, null=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    occupants_count = models.IntegerField(default=0)
+    admin = models.ForeignKey(User, on_delete = models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def create_neighborhood(self):
+        self.save()
+
+    @classmethod
+    def delete_neighborhood(cls, id):
+        cls.objects.filter(id=id).delete()
+
+    @classmethod
+    def update_neighborhood(cls, id):
+        cls.objects.filter(id=id).update()
+    
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        hood = cls.objects.filter(name__icontains=search_term)
+        return hood
+
+    # find neighbourhood by id
+    @classmethod
+    def find_neigborhood(cls, id):
+        hood = cls.objects.get(id=id)
+        return hood
+
+    def __str__(self):
+        return self.name
+
+    
 
 class Profile(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE, null=True)    
@@ -27,7 +66,8 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50)
     username =  models.CharField(max_length=100)
     profile_pic = CloudinaryField('image')
-    bio = models.CharField(max_length=250)
+    bio = models.TextField(max_length=250)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     mobile_number = models.IntegerField(blank=True)
     email =  models.CharField(max_length=60) 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -58,3 +98,5 @@ class Profile(models.Model):
         return self.user.username
 
 
+class Post(models.Model):
+    user

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Luckiest+Guy&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
 
 *{
   padding: 0;
@@ -17,43 +18,63 @@ h6{
   /* font-family: 'Staatliches', cursive; */
   font-family: 'Fredoka One', cursive;
 }
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  /* position: fixed;
-  top: 0;
-  width: 100%; */
-}
-
-li {
-  float: left;
-}
-
-.active {
-  background-color: #04AA6D;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  background-color: #111;
-  text-decoration: none;
+.prof h6{
+ 
   color: coral;
 }
+.prof h6 span{
+  color: black;
+}
+.cont-display h6 span{
+  color: coral;
+}
+.cont-display h6{
+ 
+  color: black;
+}
+.cont-display h2{
+  color: coral;
+  margin-bottom: 15px;
+  font-family: 'Luckiest Guy', cursive;
+}
+.display{
+  position: relative;
+  margin: 30px 30px 30px 30px;
+  box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  border-top: 2px solid rgba(255, 127, 80, 0.5);
+  border-left: 2px solid rgba(	255, 127, 80, 0.5);
+  padding: 1rem 3rem 3rem 3rem;
+  min-width: 400px;
+  min-height: 400px;
+}
+.cont-display{
+
+  position: relative;
+  margin: 30px;
+  box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  border-top: 2px solid rgba(255, 127, 80, 0.5);
+  border-left: 2px solid rgba(	255, 127, 80, 0.5);
+  padding: 1rem 2rem;
+  min-width: 500px;
+  min-height: 50px;
+
+}
+.prof{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .prof-pic{
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
 }

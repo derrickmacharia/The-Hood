@@ -2,37 +2,65 @@
 {% load bootstrap4 %}
 {% load static%}
 {% block content%}
-<div class="container">
+
+
+
+<div class="container container-full">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <!-- <div class="">
             <div style="font-size: 80px;">
                 <h1 class="profile">PROFILE</h1>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 profile-details">
-            {% for profile in profiles %}
-            <div class="m-2 p-3 text-center">
+        </div> -->
+        <div class="prof">
 
-                <img class="prof-pic" src="{{profile.profile_pic.url}}" alt="">
-                <p class="mt-2">{{profile.first_name}}</p>
-                <p class="mt-2">{{profile.last_name}}</p>
-                <p class="mt-2">{{profile.bio}}</p>
+            <div class="display text-center">
+
+                {% if profile.profile_pic %}
+                <img src="{{profile.profile_pic.url}}" alt="" class="prof-pic">
+                {%else%}
+                <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
+                    class="card-img-top" alt="My profile picture">
+                {% endif %}
+                <hr>
+                <h6 class="mt-2"><span>Name :</span>  {{profile.first_name}}   <span> . </span> {{profile.last_name}}</h6>
+                <h6 class="mt-2"><span>Username:</span>  {{ user.username }}</h6>
+                <h6 class="mt-2"><span>Bio:</span>
+                    {% if profile.bio %}
+                    <small>{{ profile.bio }}</small>
+                    {% endif %}
+                </h6>
+                
                 <h6>Joined on: <span class="badge rounded-pill bg-secondary text-white">
                     {{ user.date_joined|date }} </span></h6>
             </div>
-            <h6>CONTACT INFORMATION</h6>
-            <p><i class="far fa-envelope me-2"></i>{{profile.email}}</p>
-            <p><i class="fas fa-phone me-2"></i>+254{{profile.mobile_number}}</p>
-            {% endfor %}
+            <div class="cont-display">
+                <h2 class="text-center">Contact Info :</h2>
+                <h6><span><i class="far fa-envelope me-2"></i> </span>  {{profile.email}}</h6>
+                <hr>
+                <h6><span><i class="fas fa-phone me-2"></i> </span>   +254{{profile.mobile_number}}</h6>
+                <hr>
+                <h6 class="mt-2"><span><i class="fa fa-map-marker fa-lg" aria-hidden="true" ></i></span>    {{profile.location}}</h6>
+            </div>
+
             
         </div>
         
     </div>
    
     <div>
-      <a href="{%url 'update_profile' pk=user.id %}" class="phots"><i class="fa fa-plus"></i>   
-        Edit Profile
-      </a>
+        {% if request.user is user %}  
+        <div>
+          <a href="{%url 'update_profile' user.id %}" class="phots"><i class="fa fa-plus "></i>   
+            Edit Profile
+          </a>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{%url 'create_hood'  %}" class="phots"><i class="fa fa-plus "></i>   
+         Create Hood
+        </a>
     </div>
 
 </div>

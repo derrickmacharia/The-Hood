@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -37,19 +38,19 @@ def create_profile(request):
             form = ProfileForm()
     return render(request, 'profile_form.html', {'form': form})
 
-@login_required(login_url='/accounts/login/')
-def profile(request,pk):
-    current_user = request.user
-    user = User.objects.get(pk = pk)
-    profiles = Profile.objects.filter(user = user).all()
-    prof = Profile.objects.filter(user_id=current_user.id).first()
-    
-    return render(request,'profile.html',{"current_user":current_user, "user":user, "profiles":profiles, "prof":prof})
 
 
 @login_required(login_url="/accounts/login/")
-def update_profile(request,pk):
-    user = User.objects.get(pk = pk)
+def profile(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+
+    ctx = {"profile": profile}
+    return render(request, "profile.html", ctx)
+
+@login_required(login_url="/accounts/login/")
+def update_profile(request,id):
+    user = User.objects.get(id=id)
     profile = Profile.objects.get(user = user)
     form = UpdateProfileForm(instance=profile)
     if request.method == "POST":
@@ -62,3 +63,37 @@ def update_profile(request,pk):
             
     ctx = {"form":form}
     return render(request, 'update_profile.html', ctx)
+
+
+@login_required(login_url="/accounts/login/")
+def create_hood(request):
+    current_user = request.user
+    if request.method == 'POST':
+        hood_form = CreateHoodForm(request.POST, request.FILES)
+        if hood_form.is_valid():
+
+            hood = hood_form.save(commit=False)
+            hood.user = current_user
+            hood.save()
+        
+        return HttpResponseRedirect('/profile')
+
+    else:
+        hood_form = CreateHoodForm()
+
+
+    context = {'hood_form':hood_form}
+    return render(request, 'hood/create_hood.html',context)
+
+
+
+@login_required(login_url="/accounts/login/")
+def hood(request):
+    current_user = request.user
+    hood = Neighborhood.objects.all().order_by('-id')
+
+    context ={'hood':hood}
+    return render(request, 'hood/hood.html', context)
+
+
+

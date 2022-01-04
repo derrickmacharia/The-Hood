@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{{block.super}}
+
+    {% for items in hood %}
+    <img src="{{items.hood_image.url}}" alt="" class="prof-pic">
+
+    <a href="{% url '' %}"> {{ items.name }}</a>
+    {{ items.location }}
+    {{ items.occupants_count }}
+    {{ items.hood_description }}
+    
+
+    {% endfor %}
+
+{% endblock %}
