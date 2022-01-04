@@ -9,6 +9,19 @@ from django.db.models.fields import related
 # Create your models here.
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # save location
+    def save_category(self):
+        self.save()
+
+    def __str__(self):
+        return self.name
+
+
 class Location(models.Model):
     name = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -100,8 +113,13 @@ class Profile(models.Model):
 
 class Post(models.Model):
     user = models.ForeignKey(User,on_delete = models.CASCADE, null=True)  
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     post_image = CloudinaryField('post_image', null=True)
     post_description = models.TextField(max_length=1000)
     hood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, null=True)
-    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
