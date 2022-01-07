@@ -6,13 +6,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="prof-body">
-                <form action="{% url 'create_hood'%}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'create_post'%}" method="post" enctype="multipart/form-data">
 
                     {% load crispy_forms_tags %}
-                    {{ hood_form | crispy }}
+                    {{ post_form | crispy }}
                     {% csrf_token %}
                     <div class="form-group text-center">
-                        <input type="submit" class="m-4 btn btn-primary login-btn" value="CREATE HOOD">
+                        <input type="submit" class="m-4 btn btn-primary login-btn" value="ADD POST">
                     </div>
                     
                 </form>
@@ -20,5 +20,6 @@
         </div>
 
     </div>
+</div>
 </div>
 {% endblock %}

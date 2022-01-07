@@ -4,6 +4,8 @@ import datetime as dt
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 from django.db.models.fields import related
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 # Create your models here.
@@ -74,41 +76,54 @@ class Neighborhood(models.Model):
     
 
 class Profile(models.Model):
-    user = models.ForeignKey(User,on_delete = models.CASCADE, null=True)    
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile', null=True)   
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     username =  models.CharField(max_length=100)
     profile_pic = CloudinaryField('image')
     bio = models.TextField(max_length=250)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    mobile_number = models.IntegerField(blank=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    neighbourhood = models.ForeignKey(Neighborhood, on_delete=models.SET_NULL, null=True, related_name='members', blank=True)
+    mobile_number = models.IntegerField(blank=True, null=True)
     email =  models.CharField(max_length=60) 
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)    
 
-
-    def update(self):
-        self.save()
-
-    def save_profile(self):
-        self.save()
-
-    def delete_profile(self):
-        self.delete()
-
-    def create_profile(self):
-        self.save()
-
-    def update_profile(self):
-        self.update()
-
-    @classmethod
-    def get_profile_by_user(cls, user):
-        profile = cls.objects.filter(user=user)
-        return profile
-
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} profile'
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+    # def update(self):
+    #     self.save()
+
+    # def save_profile(self):
+    #     self.save()
+
+    # def delete_profile(self):
+    #     self.delete()
+
+    # def create_profile(self):
+    #     self.save()
+
+    # def update_profile(self):
+    #     self.update()
+
+    # @classmethod
+    # def get_profile_by_user(cls, user):
+    #     profile = cls.objects.filter(user=user)
+    #     return profile
+
+    # def __str__(self):
+    #     return self.user.username
 
 
 class Post(models.Model):

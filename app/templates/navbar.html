@@ -21,22 +21,36 @@
       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#"><i class="fa fa-briefcase fa-lg" aria-hidden="true"></i></a>
+      <!-- <a class="nav-link" href="#"><i class="fa fa-briefcase fa-lg" aria-hidden="true"></i></a> -->
     </li>
     {% for prof in profiles %}
     <li class="nav-item">
       <a class="" href="{% url 'profile'%}"><img src="{{ prof.profile_pic.url }}" alt="" class="profile-img"> </a>
     </li>
     {% endfor %}
-    <div>
-      <a href="{%url 'hood'  %}" class="phots">
-        Hood
-      </a>
-  </div>
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="{%url 'hood' %}" >Hood</a>
+    </li> -->
     <li class="nav-item">
       <a class="nav-link" href="{% url 'logout'%}">Logout</a>
     </li>
     {% else %}
+
+    {% if user.profile.neighbourhood %}
+    <li class="mb-4">
+        <a href="{% url 'single-hood' user.profile.neighbourhood.id %}">
+            <i class="fas fa-paper-plane"></i>&nbsp;
+            &nbsp;{{user.profile.neighbourhood.name}}
+        </a>
+    </li>
+    {% else %}
+    <li class="mb-4">
+        <a href=""> &nbsp;
+            No Hood Yet
+        </a>
+    </li>
+    {% endif %}
+    
       <li>
         <a class='btn btn-default' href="/accounts/login">Login</a>
       </li>

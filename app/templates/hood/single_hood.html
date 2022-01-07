@@ -1,0 +1,40 @@
+
+<style>
+  .hood-pic{
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+  }
+  .hoods{
+    height: 70vh;
+    text-align: center;
+    color: #fff;
+  }
+  .single-hood{
+    padding-top: 5rem;
+  }
+  .name{
+    font-size: 50px;
+  }
+  .description{
+    font-size: 20px;
+  }
+
+
+</style>
+
+{% extends 'base.html'%}
+{% block content %}
+{{block.super}}
+<div class="container-full">
+      <div class="hoods" style="background-image: url({{hood.hood_image.url}})">
+        <!-- <img src="{{hood.hood_image.url}}" alt="" class="hood-pic" > -->
+        <div class="single-hood">
+          <p class="name">{{hood.name}}</p>
+          <p class="description">{{hood.hood_description}}</p>
+          <p class="residents">Occupants: <span class="badge rounded-pill bg-secondary text-white">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

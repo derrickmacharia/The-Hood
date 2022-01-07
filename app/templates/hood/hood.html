@@ -3,15 +3,26 @@
 {% block content %}
 {{block.super}}
 
-    {% for items in hood %}
-    <img src="{{items.hood_image.url}}" alt="" class="prof-pic">
+    <div class="container-full container">
+        {% for items in hood %}
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{items.hood_image.url}}" alt="" class="prof-pic">
 
-    <a href="{% url '' %}"> {{ items.name }}</a>
-    {{ items.location }}
-    {{ items.occupants_count }}
-    {{ items.hood_description }}
-    
+                    <a href=""><p class="name">{{items.name}}</p></a>
+                    {{ items.location }}
+                    {{items.members.count}} member{{items.members.count|pluralize}}
+                    {{ items.hood_description }}
 
-    {% endfor %}
-
+                    {% if request.user.profile.neighbourhood == items %}
+                    <a href="{% url 'leave-hood' items.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
+                    <a href="{% url 'single_hood' items.name %}" class="btn btn-outline-success btn-sm">Enter Hood</a>
+                    {% elif not request.user.profile.neighbourhood %}
+                    <a href="{% url 'join-hood' items.name %}" class="btn btn-primary btn-sm">Join Hood</a>
+                    {% endif %}
+                    
+                </div>
+                {% endfor %}
+            </div>
+    </div>
 {% endblock %}

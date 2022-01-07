@@ -24,12 +24,15 @@
                 {% endif %}
                 <hr>
                 <h6 class="mt-2"><span>Name :</span>  {{profile.first_name}}   <span> . </span> {{profile.last_name}}</h6>
+                <hr>
                 <h6 class="mt-2"><span>Username:</span>  {{ user.username }}</h6>
+                <hr>
                 <h6 class="mt-2"><span>Bio:</span>
                     {% if profile.bio %}
                     <small>{{ profile.bio }}</small>
                     {% endif %}
                 </h6>
+                <hr>
                 
                 <h6>Joined on: <span class="badge rounded-pill bg-secondary text-white">
                     {{ user.date_joined|date }} </span></h6>
@@ -50,7 +53,7 @@
    
     <div>
         {% if request.user is user %}  
-        <div>
+        <div class="">
           <a href="{%url 'update_profile' user.id %}" class="phots"><i class="fa fa-plus "></i>   
             Edit Profile
           </a>
