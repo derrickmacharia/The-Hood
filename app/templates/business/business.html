@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+   body{
+    font-family: 'Lato', global_font_string;
+    font-weight: 500;
+    background-color: #081C15;
+    color: whitesmoke;
+    }
+    .biz{
+        color: black;
+    }
+</style>
+<section class="blog-section" id="">
+    <div class="container mt-5 ">
+        <div class="text-center mb-3">
+            <a href="{%url 'create_business'  %}"  class="btn btn-outline-dark bg-dark text-white rounded-pill">
+             Add New Business
+            </a>
+        </div>
+            <h2 class="text-center headings">All Businesses
+            </h2>
+            <div class="row biz">
+            {% for biz in businesses %}
+            <div class="col-md-4">
+                <div class="card" >
+                    <div class="card-body">
+                        <img src="{{biz.business_photo.url}}" alt="" style="border-radius: 50%; width: 50%; height: auto;">
+                        <h5 class="card-title text-capitalize">{{ biz.name }}</h5>
+                        <p>{{ biz.description }}</p>
+                        <p>{{ biz.neighborhood }}</p>
+                        <p>{{ biz.location }}</p>
+                        <a href="mailto: {{ biz.email }}" class="card-link"  target="_blank">Email: <span class="text-bold text-primary">{{ biz.email }}</span> </a>
+                       <br>
+                    </div>
+                  </div>
+            </div>
+            {% empty %}
+            <div class="col-md-12">
+                <div class="card mb-4 post-card">
+                    <div class="card-body text-center">
+                        <h6 class="fade-item mb-2 text-danger">No businesses found within your Neighborhood!!</h6>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
