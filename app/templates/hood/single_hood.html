@@ -40,46 +40,112 @@
           <p class="residents">Occupants: <span class="badge rounded-pill bg-secondary text-white">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></p>
         </div>
 
-          <a class="posts" href="{% url 'create_post' %}">Add Post</a>
+        <div class="row">
+          <div class="col-md-6">
+            <a class="posts" href="{% url 'create_post' %}">Add Post</a>
+          </div>
+          <div class="col-md-6">
+            <a href="{%url 'create_business'  %}"  class="posts">
+              Add New Business
+             </a>
+          </div>
+        </div>
 
     </div>
     
     <section class="blog-section" id="posts main">
       <div class="container mt-5" style="gap: 15px;">
-          <h2 class="text-center">New Posts</h2>
-          <div class="row mt-4" id="">
-             
-              {% for posts in post %}
-              <div class="col-md-12 col-md-6 col-lg-4" id="main" style="gap: 15px;">
-                  
-                  <div class="card mb-4" id="">
-                      <div data-toggle="modal" data-target="#showPicModal{{posts.id}}">
-                          <img src="{{ posts.post_image.url }}" alt="" class="post-img"> 
-                      </div>
-                          
-                      <div class="card-body ">
-                          <p class="fade-item mb-2">{{ posts.title }}</p>
-                          <div class="justify-content-between location-date">
-                              <div>
-                                  <p class="text-capitalise">{{ posts.neighborhood }}</p>
-                              </div>
-                              <div class="post-content">
-                                  <p class="text-uppercase badge rounded-pill bg-warning text-dark text-capitalize">{{ posts.created_at|date}}</p>
-                                  <p>{{ posts.hood }}</p>
-                                  <p class="text-uppercase badge rounded-pill bg-info text-white text-capitalize">{{ posts.category }}</p>
-                              </div>
-                              
+        <h2 class="text-center">New Posts</h2>
+        <div class="row mt-4" id="">
+           
+            {% for posts in post %}
+            <div class="col-md-12 col-md-6 col-lg-4" id="main" style="gap: 15px;">
+                
+                <div class="card mb-4" id="">
+                    <div data-toggle="modal" data-target="#showPicModal{{posts.id}}">
+                        <img src="{{ posts.post_image.url }}" alt="" class="post-img"> 
+                    </div>
+                        
+                    <div class="card-body ">
+                        <p class="fade-item mb-2">{{ posts.title }}</p>
+                        <div class="justify-content-between location-date">
+                            <div>
+                                <p class="text-capitalise">{{ posts.neighborhood }}</p>
+                            </div>
+                            <div class="post-content">
+                              <p class="text-uppercase badge rounded-pill bg-warning text-dark text-capitalize">{{ posts.created_at|date}}</p>
+                              <p>{{ posts.hood }}</p>
+                              <p class="text-uppercase badge rounded-pill bg-info text-white text-capitalize">{{ posts.category }}</p>
                           </div>
-
+                          
                       </div>
+
                   </div>
               </div>
-              
-              {% endfor %}
           </div>
+          
+          {% endfor %}
       </div>
-        
-   
+    </div>
+        <h2 class="text-center headings">All Businesses
+        </h2>
+        <div class="row biz">
+        {% for biz in businesses %}
+        <div class="col-md-4">
+            <div class="card" >
+                <div class="card-body">
+                    <img src="{{biz.business_photo.url}}" alt=""  class="post-img">
+                    <h5 class="card-title text-capitalize">{{ biz.name }}</h5>
+                    <p>{{ biz.description }}</p>
+                    <p>{{ biz.neighborhood }}</p>
+                    <p>{{ biz.location }}</p>
+                    <a href="mailto: {{ biz.email }}" class="card-link"  target="_blank">Email: <span class="text-bold text-primary">{{ biz.email }}</span> </a>
+                   <br>
+                </div>
+              </div>
+        </div>
+        {% empty %}
+        <div class="col-md-12">
+            <div class="card mb-4 post-card">
+                <div class="card-body text-center">
+                    <h6 class="fade-item mb-2 text-danger">No businesses found within your Neighborhood!!</h6>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+      </div>
+    </section>   
+
+    <div class="row mt-4" id="">
+           
+      {% for posts in post %}
+      <div class="col-md-12 col-md-6 col-lg-4" id="main" style="gap: 15px;">
+          
+          <div class="card mb-4" id="">
+              <div data-toggle="modal" data-target="#showPicModal{{posts.id}}">
+                <img src="{{biz.business_photo.url}}" alt=""  class="post-img">
+              </div>
+                  
+              <div class="card-body ">
+                  <p class="fade-item mb-2">{{ biz.name }}</p>
+                  <div class="justify-content-between location-date">
+                      <div>
+                        <p>{{ biz.description }}</p>
+                      </div>
+                      <div class="post-content">
+                        <p class="text-uppercase badge rounded-pill bg-warning text-dark text-capitalize">{{ posts.created_at|date}}</p>
+                        <p>{{ posts.hood }}</p>
+                        <p class="text-uppercase badge rounded-pill bg-info text-white text-capitalize">{{ posts.category }}</p>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    {% endfor %}
+</div>
 </div>
 
 {% endblock %}
