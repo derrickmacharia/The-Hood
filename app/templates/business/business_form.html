@@ -9,7 +9,7 @@
                 <form action="" method="post" enctype="multipart/form-data">
 
                     {% load crispy_forms_tags %}
-                    {{ post_form | crispy }}
+                    {{ form | crispy }}
                     {% csrf_token %}
                     <div class="form-group text-center">
                         <input type="submit" class="m-4 btn btn-primary login-btn" value="ADD POST">
