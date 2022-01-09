@@ -11,10 +11,10 @@ from .models import *
 def home(request):
     current_user = request.user
     profiles = Profile.objects.filter(user_id = current_user.id).all()
-    # post =  Post.objects.all().order_by('-id')
+    post =  Post.objects.all().order_by('-id')
 
 
-    return render(request, 'home.html',{'profiles':profiles})
+    return render(request, 'home.html',{'profiles':profiles, 'post':post})
 
 @login_required(login_url='/accounts/login/')
 def create_profile(request):
@@ -97,9 +97,9 @@ def single_hood(request,name):
     hood = Neighborhood.objects.get(name=name)
     profiles = Profile.objects.filter(neighbourhood=hood)
     post = Post.objects.filter(hood=hood)
+    businesses = Business.objects.filter(neighborhood=hood)
 
-
-    ctx = {"hood":hood, 'profiles':profiles, 'post':post}
+    ctx = {"hood":hood, 'profiles':profiles, 'post':post, 'businesses':businesses}
     return render(request, 'hood/single_hood.html', ctx)
 
 def hood_members(request, hood_id):
@@ -142,3 +142,34 @@ def create_post(request):
 
     return render(request, 'post/create_post.html',context)
 
+@login_required(login_url="/accounts/login/")
+def create_business(request):
+    current_user = request.user
+    if request.method == "POST":
+        form=BusinessForm(request.POST,request.FILES)
+        if form.is_valid():
+            business=form.save(commit=False)
+            business.user=current_user
+            business.hood = hoods
+            business.save()
+        return HttpResponseRedirect('/businesses')
+    else:
+        form=BusinessForm()
+    return render (request,'business/business_form.html', {'form': form, 'profile': profile})
+
+@login_required(login_url="/accounts/login/")
+def businesses(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    businesses = Business.objects.filter(user_id=current_user.id)
+    if profile is None:
+        profile = Profile.objects.filter(
+            user_id=current_user.id).first()
+        businesses = Business.objects.filter(user_id=current_user.id)
+        locations = Location.objects.all()
+        neighborhood = Neighborhood.objects.all()
+        return render(request, "profile.html", {"danger": "Update Profile", "locations": locations, "neighborhood": neighborhood, "businesses": businesses})
+    else:
+        neighborhood = profile.neighbourhood
+        businesses = Business.objects.filter(user_id=current_user.id)
+        return render(request, "business/business.html", {"businesses": businesses})
