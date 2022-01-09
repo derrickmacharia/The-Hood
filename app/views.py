@@ -7,19 +7,14 @@ from .forms import *
 from .models import *
 # Create your views here.
 
-# @login_required(login_url='/accounts/login/')
-# def home(request):
-#     current_user = request.user
-#     try:
-#         if not request.user.is_authenticated:
-#             return redirect('/accounts/login/')
-#         current_user = request.user
-#         profile =Profile.objects.get(user=current_user)
-        
-#     except ObjectDoesNotExist:
-#         return redirect('create_profile')
-#     profiles = Profile.objects.filter(user_id = current_user.id).all()
-#     return render(request, 'home.html',{'profiles':profiles,})
+@login_required(login_url='/accounts/login/')
+def home(request):
+    current_user = request.user
+    profiles = Profile.objects.filter(user_id = current_user.id).all()
+    # post =  Post.objects.all().order_by('-id')
+
+
+    return render(request, 'home.html',{'profiles':profiles})
 
 @login_required(login_url='/accounts/login/')
 def create_profile(request):
@@ -77,7 +72,7 @@ def create_hood(request):
             hood.user = current_user
             hood.save()
         
-        return HttpResponseRedirect('/profile')
+        return HttpResponseRedirect('/')
 
     else:
         hood_form = CreateHoodForm()
@@ -98,9 +93,13 @@ def hoods(request):
 
 @login_required(login_url="/accounts/login/")
 def single_hood(request,name):
+    current_user = request.user
     hood = Neighborhood.objects.get(name=name)
-      
-    ctx = {"hood":hood}
+    profiles = Profile.objects.filter(neighbourhood=hood)
+    post = Post.objects.filter(hood=hood)
+
+
+    ctx = {"hood":hood, 'profiles':profiles, 'post':post}
     return render(request, 'hood/single_hood.html', ctx)
 
 def hood_members(request, hood_id):
@@ -123,6 +122,7 @@ def leave_hood(request, id):
 
 @login_required(login_url="/accounts/login/")
 def create_post(request):
+    
 
     current_user = request.user
     if request.method == 'POST':
@@ -133,7 +133,7 @@ def create_post(request):
             post.user = current_user
             post.save()
         
-        return HttpResponseRedirect('/profile')
+        return HttpResponseRedirect('hood')
 
     else:
         post_form = PostForm()

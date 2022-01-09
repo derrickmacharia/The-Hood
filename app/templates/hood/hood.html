@@ -1,3 +1,14 @@
+<style>
+    .hood-pic{
+        width: 350px;
+        height: 200px;
+    }
+    /* .hood-content{
+        gap: 20px;
+        
+    } */
+</style>
+
 {% extends 'base.html'%}
 
 {% block content %}
@@ -7,12 +18,14 @@
         {% for items in hood %}
             <div class="row">
                 <div class="col-md-4">
-                    <img src="{{items.hood_image.url}}" alt="" class="prof-pic">
+                    <p class="name text-center">{{items.name}}</p>
+                    <img src="{{items.hood_image.url}}" alt="" class="hood-pic">
 
-                    <a href=""><p class="name">{{items.name}}</p></a>
-                    {{ items.location }}
-                    {{items.members.count}} member{{items.members.count|pluralize}}
-                    {{ items.hood_description }}
+                    <div class="hood-content">
+                        {{ items.location }}
+                        {{items.members.count}} member{{items.members.count|pluralize}}
+                        
+                    </div>
 
                     {% if request.user.profile.neighbourhood == items %}
                     <a href="{% url 'leave-hood' items.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>

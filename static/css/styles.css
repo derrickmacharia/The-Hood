@@ -96,3 +96,58 @@ h6{
 .name{
   font-size: 30px;
 }
+/* .hood-pic{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+} */
+.posts {
+  padding: 10px 15px;
+  border: none;
+  background-color: coral;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+.posts:hover{
+  text-decoration: none;
+  color: #fff;
+}
+.post-img{
+  height: 260px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.post-content{
+  display: flex;
+  justify-content: space-between;
+}
+.responsive{
+  height: auto;
+  width: 100%;
+  object-fit: cover;
+}
+.carol{
+  height: 70vh;
+  width: 100%;
+  object-fit: cover;
+}
+.cc{
+  align-items: center;
+  justify-content: center;
+}
+.cc h3{
+  color: coral;
+  margin-bottom: 15px;
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 40px;
+}
+.cc p{
+  font-size: 22px;
+}
+.blog-section h2{
+  color: coral;
+  font-family: 'Fredoka One', cursive;
+}

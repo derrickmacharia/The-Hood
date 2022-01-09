@@ -1,5 +1,7 @@
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Luckiest+Guy&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
+
   .hood-pic{
     width: 100%;
     height: 60vh;
@@ -9,12 +11,15 @@
     height: 70vh;
     text-align: center;
     color: #fff;
+    width: 100%;
   }
   .single-hood{
     padding-top: 5rem;
   }
-  .name{
-    font-size: 50px;
+  .single-name{
+    font-size: 60px;
+    color: coral;
+    font-family: 'Luckiest Guy', cursive;
   }
   .description{
     font-size: 20px;
@@ -27,14 +32,54 @@
 {% block content %}
 {{block.super}}
 <div class="container-full">
-      <div class="hoods" style="background-image: url({{hood.hood_image.url}})">
+      <div class="hoods" style="background-size: cover; background-repeat: no-repeat; background-image: url({{hood.hood_image.url}})">
         <!-- <img src="{{hood.hood_image.url}}" alt="" class="hood-pic" > -->
         <div class="single-hood">
-          <p class="name">{{hood.name}}</p>
+          <p class="single-name">{{hood.name}}</p>
           <p class="description">{{hood.hood_description}}</p>
           <p class="residents">Occupants: <span class="badge rounded-pill bg-secondary text-white">{{hood.members.count}} member{{hood.members.count|pluralize}}</span></p>
         </div>
+
+          <a class="posts" href="{% url 'create_post' %}">Add Post</a>
+
     </div>
+    
+    <section class="blog-section" id="posts main">
+      <div class="container mt-5" style="gap: 15px;">
+          <h2 class="text-center">New Posts</h2>
+          <div class="row mt-4" id="">
+             
+              {% for posts in post %}
+              <div class="col-md-12 col-md-6 col-lg-4" id="main" style="gap: 15px;">
+                  
+                  <div class="card mb-4" id="">
+                      <div data-toggle="modal" data-target="#showPicModal{{posts.id}}">
+                          <img src="{{ posts.post_image.url }}" alt="" class="post-img"> 
+                      </div>
+                          
+                      <div class="card-body ">
+                          <p class="fade-item mb-2">{{ posts.title }}</p>
+                          <div class="justify-content-between location-date">
+                              <div>
+                                  <p class="text-capitalise">{{ posts.neighborhood }}</p>
+                              </div>
+                              <div class="post-content">
+                                  <p class="text-uppercase badge rounded-pill bg-warning text-dark text-capitalize">{{ posts.created_at|date}}</p>
+                                  <p>{{ posts.hood }}</p>
+                                  <p class="text-uppercase badge rounded-pill bg-info text-white text-capitalize">{{ posts.category }}</p>
+                              </div>
+                              
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+              
+              {% endfor %}
+          </div>
+      </div>
+        
+   
 </div>
 
 {% endblock %}
