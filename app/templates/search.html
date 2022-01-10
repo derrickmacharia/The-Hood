@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container ser">
+    <h2 class="text-center mb-5">Your search results</h2>
+
+    <div class="row biz">
+
+
+        {% for business in businesses %}
+            <div class="col-md-4">
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize">{{ business.name }}</h5>
+                        <p>{{ business.description }}</p>
+                        <p>{{ business.neighborhood }}</p>
+                        <p>{{ business.location }}</p>
+                        <a href="malto:{{ business.email }}" class="card-link">Email: <span class="text-bold text-primary">{{ business.email }}</span> </a>
+                       <br>
+                    </div>
+                  </div>
+            </div>
+
+            {% empty %}
+            <div class="col-md-12">
+                <div class="card mb-4 post-card">
+                    <div class="card-body text-center">
+                        <h6 class="fade-item mb-2 text-danger">No businesses found within your Neighborhood!!</h6>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+
+
+    </div>
+</div>
+{% endblock %}
