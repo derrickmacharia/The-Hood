@@ -9,12 +9,16 @@
 
 
 
-  <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo03">
-    <form class="form-inline justify-content-center">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    
+  <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo03"> 
+
+      <form style="color:black; margin-left: 30%;font-size: 30px;"class="me-auto search-form " target="_self" action="{% url 'search_business' %}">
+          <div class="input-group text-dark">
+  
+              <input style="font-size:15px "type="text" class="form-control" placeholder="Search Business"
+                  name="search_term">
+          </div>
+      </form>
+      
   </div>
   <ul class="nav justify-content-end">
     <li class="nav-item active">
