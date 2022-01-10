@@ -20,7 +20,7 @@
                 <img src="{{profile.profile_pic.url}}" alt="" class="prof-pic">
                 {%else%}
                 <img src="https://st2.depositphotos.com/1104517/11965/v/600/depositphotos_119659092-stock-illustration-male-avatar-profile-picture-vector.jpg"
-                    class="card-img-top" alt="My profile picture">
+                    class="card-img-top prof-pic" alt="My profile picture">
                 {% endif %}
                 <hr>
                 <h6 class="mt-2"><span>Name :</span>  {{profile.first_name}}   <span> . </span> {{profile.last_name}}</h6>
@@ -51,21 +51,26 @@
         
     </div>
    
-    <div>
-        {% if request.user is user %}  
-        <div class="">
-          <a href="{%url 'update_profile' user.id %}" class="phots"><i class="fa fa-plus "></i>   
-            Edit Profile
-          </a>
-        </div>
-        {% endif %}
-    </div>
-    <div>
-        <a href="{%url 'create_hood'  %}" class="phots"><i class="fa fa-plus "></i>   
-         Create Hood
-        </a>
-    </div>
+    
 
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            {% if request.user is user %}  
+            <div class="">
+              <a href="{%url 'update_profile' user.id %}" class="phots"><i class="fa fa-plus "></i>   
+                Edit Profile
+              </a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <a href="{%url 'create_hood'  %}" class="phots"><i class="fa fa-plus "></i>   
+             Create Hood
+            </a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

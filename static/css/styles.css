@@ -93,6 +93,10 @@ h6{
   border-radius: 5px;
   margin-bottom: 1rem;
 }
+.phots:hover{
+  text-decoration: none;
+  color: #fff;
+}
 .name{
   font-size: 30px;
 }
