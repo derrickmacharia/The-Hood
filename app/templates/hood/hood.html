@@ -1,4 +1,6 @@
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Cookie&family=Marck+Script&family=Playball&family=Staatliches&display=swap');
+
     .hood-pic{
         width: 350px;
         height: 200px;
@@ -8,6 +10,16 @@
         gap: 20px;
         
     } */
+    h1{
+        margin-top: 2rem;
+        color: coral;
+        font-family: 'Staatliches', cursive;
+        text-align: center;
+    }
+    .hoodd{
+        background: rgb(228, 226, 226);
+        min-height: 100vh;
+    }
 </style>
 
 {% extends 'base.html'%}
@@ -15,30 +27,33 @@
 {% block content %}
 {{block.super}}
 
-    <div class="container ">
-        {% for items in hood %}
-            <div class="row">
-                <div class="cards">
-                    <div class="col-md-6 ">
+    <div class="hoodd">
+        <div class="container ">
+            <h1>Choose A Hood </h1>
+            {% for items in hood %}
+                <div class="row">
+                    <div class="cards">
+                        <div class="col-md-6 ">
+                            
+                            <img src="{{items.hood_image.url}}" alt="" class="hood-pic">
+                            <p class="name ">{{items.name}}</p>
+                            <div class="hood-content">
+                                {{ items.location }}
+                                {{items.members.count}} member{{items.members.count|pluralize}}
+    
+                            </div>
+    
+                            {% if request.user.profile.neighbourhood == items %}
+                            <a href="{% url 'leave-hood' items.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
+                            <a href="{% url 'single_hood' items.name %}" class="btn btn-outline-success btn-sm">Enter Hood</a>
+                            {% elif not request.user.profile.neighbourhood %}
+                            <a href="{% url 'join-hood' items.name %}" class="btn btn-primary btn-sm">Join Hood</a>
+                            {% endif %}
                         
-                        <img src="{{items.hood_image.url}}" alt="" class="hood-pic">
-                        <p class="name ">{{items.name}}</p>
-                        <div class="hood-content">
-                            {{ items.location }}
-                            {{items.members.count}} member{{items.members.count|pluralize}}
-
                         </div>
-
-                        {% if request.user.profile.neighbourhood == items %}
-                        <a href="{% url 'leave-hood' items.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
-                        <a href="{% url 'single_hood' items.name %}" class="btn btn-outline-success btn-sm">Enter Hood</a>
-                        {% elif not request.user.profile.neighbourhood %}
-                        <a href="{% url 'join-hood' items.name %}" class="btn btn-primary btn-sm">Join Hood</a>
-                        {% endif %}
-                    
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
+        </div>
     </div>
 {% endblock %}
