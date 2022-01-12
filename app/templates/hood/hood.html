@@ -15,26 +15,28 @@
 {% block content %}
 {{block.super}}
 
-    <div class="container-full container">
+    <div class="container ">
         {% for items in hood %}
             <div class="row">
-                <div class="col-md-4">
-                    <p class="name text-center">{{items.name}}</p>
-                    <img src="{{items.hood_image.url}}" alt="" class="hood-pic">
-
-                    <div class="hood-content">
-                        {{ items.location }}
-                        {{items.members.count}} member{{items.members.count|pluralize}}
+                <div class="cards">
+                    <div class="col-md-6 ">
                         
-                    </div>
+                        <img src="{{items.hood_image.url}}" alt="" class="hood-pic">
+                        <p class="name ">{{items.name}}</p>
+                        <div class="hood-content">
+                            {{ items.location }}
+                            {{items.members.count}} member{{items.members.count|pluralize}}
 
-                    {% if request.user.profile.neighbourhood == items %}
-                    <a href="{% url 'leave-hood' items.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
-                    <a href="{% url 'single_hood' items.name %}" class="btn btn-outline-success btn-sm">Enter Hood</a>
-                    {% elif not request.user.profile.neighbourhood %}
-                    <a href="{% url 'join-hood' items.name %}" class="btn btn-primary btn-sm">Join Hood</a>
-                    {% endif %}
+                        </div>
+
+                        {% if request.user.profile.neighbourhood == items %}
+                        <a href="{% url 'leave-hood' items.id %}" class="btn btn-outline-danger btn-sm">Leave Hood</a>
+                        <a href="{% url 'single_hood' items.name %}" class="btn btn-outline-success btn-sm">Enter Hood</a>
+                        {% elif not request.user.profile.neighbourhood %}
+                        <a href="{% url 'join-hood' items.name %}" class="btn btn-primary btn-sm">Join Hood</a>
+                        {% endif %}
                     
+                    </div>
                 </div>
                 {% endfor %}
             </div>

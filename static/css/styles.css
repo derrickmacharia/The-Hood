@@ -99,6 +99,7 @@ h6{
 }
 .name{
   font-size: 30px;
+  color: coral;
 }
 /* .hood-pic{
   width: 200px;
@@ -154,4 +155,24 @@ h6{
 .blog-section h2{
   color: coral;
   font-family: 'Fredoka One', cursive;
+}
+
+.cards{
+  border-radius: 20px;
+  padding: 10px;
+  font-family: 'Fredoka One', cursive;
+  box-shadow: 0 0 10px rgba(112, 108, 108, 0.3), 0 0 20px rgba(112, 108, 108, 0.1), 0 0 40px rgba(112, 108, 108, 0.1);
+  margin-left: 2.5rem;
+  margin-top: 3rem;
+
+}
+.hood-cards{
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.hood-pic{
+  border-radius: 5px;
 }

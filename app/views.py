@@ -97,7 +97,7 @@ def single_hood(request,name):
     hood = Neighborhood.objects.get(name=name)
     profiles = Profile.objects.filter(neighbourhood=hood)
     post = Post.objects.filter(hood=hood)
-    businesses = Business.objects.filter(neighbourhood=hood)
+    businesses = Business.objects.filter(neighborhood=hood)
 
     ctx = {"hood":hood, 'profiles':profiles, 'post':post, 'businesses':businesses}
     return render(request, 'hood/single_hood.html', ctx)
