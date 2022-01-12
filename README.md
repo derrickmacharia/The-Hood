@@ -13,23 +13,9 @@ Neighborhood is a simple web application that allows you to be in the loop about
  (https://myhoody.herokuapp.com/)
 
 ## Screenshots
-###### Screenshot 1
-<img src="static/images/Screenshot (1).png">
-
-###### Screenshot 2
 <img src="static/images/Screenshot (2).png">
 
-###### Screenshot 3
- <img src="static/images/Screenshot (3).png">
 
-###### Screenshot 4
- <img src="static/images/Screenshot (4).png">
-
-###### Screenshot 5
- <img src="static/images/Screenshot (5).png">
-
-###### Screenshot 6
- <img src="static/images/Screenshot (6).png">
 
 ## Setup and Installation 
 
